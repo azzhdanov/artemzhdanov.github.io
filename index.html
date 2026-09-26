@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artem Zhdanov — Senior software engineer</title>
+<meta name="description" content="Artem Zhdanov: senior software engineer with five years of production experience, now working on AI for energy and climate data. Based in Grenoble.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.4'%3E%3Cstop offset='0' stop-color='%23FFB42A'/%3E%3Cstop offset='.5' stop-color='%23E8233F'/%3E%3Cstop offset='1' stop-color='%237A55D8'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS 
+   ============================================================ */
+:root{
+  --paper:#E2E1DC;      /* greige base */
+  --cell:#EAE9E4;       /* slightly lighter panels */
+  --ink:#1A1A18;
+  --soft:#5B5A55;
+  --rule:rgba(26,26,24,.18);
+  /* thermal scale: cold -> hot */
+  --cold:#9EC5EC;
+  --violet:#7A55D8;
+  --red:#E8233F;
+  --orange:#FF6A1A;
+  --yellow:#FFB42A;
+
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pad:clamp(20px, 4vw, 48px);
+  --gap-y:clamp(56px, 8vw, 104px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{scroll-behavior:smooth; scroll-padding-top:72px}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red); outline-offset:3px; border-radius:4px}
+
+/* film grain over everything */
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:100;
+  opacity:.28; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.frame{max-width:1280px; margin:0 auto; border-inline:1px solid var(--rule); position:relative}
+
+/* ---------- type ---------- */
+.display{
+  font-family:var(--serif); font-weight:850;
+  font-variation-settings:"opsz" 144;
+  letter-spacing:-.035em; line-height:.9;
+}
+.h2{font-size:clamp(48px, 7.5vw, 104px)}
+.lead{font-family:var(--serif); font-weight:400; font-variation-settings:"opsz" 36; font-size:clamp(22px, 2.3vw, 30px); line-height:1.3; letter-spacing:-.01em}
+.small{font-size:14px; color:var(--soft); line-height:1.45}
+.measure{max-width:62ch}
+
+/* ---------- header ---------- */
+.top{
+  position:sticky; top:0; z-index:50;
+  padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb, var(--paper) 82%, transparent);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.top-in{display:flex; align-items:center; gap:24px; padding:14px var(--pad)}
+.mark{font-family:var(--serif); font-weight:850; font-size:28px; letter-spacing:-.04em; text-decoration:none; line-height:1}
+.nav{display:flex; gap:22px; margin-left:auto}
+.nav a{text-decoration:none; font-size:15px; font-weight:500}
+.nav a:hover{text-decoration:underline; text-underline-offset:4px}
+.lang{display:inline-flex; border:1px solid var(--ink); border-radius:999px; padding:3px}
+.lang button{
+  font:600 13px/1 var(--sans); letter-spacing:.02em;
+  border:0; background:none; color:var(--ink); cursor:pointer;
+  padding:7px 11px; border-radius:999px;
+}
+.lang button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+
+.btn{
+  display:inline-flex; align-items:center; gap:.55em;
+  padding:.85em 1.35em; border-radius:999px;
+  background:var(--ink); color:var(--paper);
+  font:600 15px/1 var(--sans); text-decoration:none; white-space:nowrap;
+  transition:transform .2s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn--ghost{background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
+.btn--sm{padding:.7em 1.1em; font-size:14px}
+
+/* ---------- hero ---------- */
+.hero{position:relative; overflow:hidden; isolation:isolate}
+.heat{position:absolute; inset:0; z-index:-1; pointer-events:none}
+.blob{position:absolute; border-radius:50%; filter:blur(70px); opacity:.85}
+.b1{width:46vw; max-width:560px; aspect-ratio:1; left:38%; top:-10%; background:var(--orange)}
+.b2{width:34vw; max-width:420px; aspect-ratio:1; left:52%; top:34%; background:var(--red)}
+.b3{width:30vw; max-width:380px; aspect-ratio:1; left:24%; top:48%; background:var(--violet); opacity:.55}
+.b4{width:24vw; max-width:300px; aspect-ratio:1; left:62%; top:-6%; background:var(--yellow); opacity:.8}
+.b5{width:30vw; max-width:360px; aspect-ratio:1; left:-8%; top:60%; background:var(--cold); opacity:.6}
+.heat-cursor{
+  position:absolute; inset:0;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%), rgba(255,106,26,.28), transparent 70%);
+  transition:opacity .4s; opacity:0;
+}
+.hero:hover .heat-cursor{opacity:1}
+
+.hero-grid{display:grid; grid-template-columns:1.2fr 1fr .62fr; min-height:min(78vh, 760px)}
+.hero-copy{padding:var(--gap-y) var(--pad) 48px; display:flex; flex-direction:column; justify-content:flex-end; gap:22px}
+.hi{font-family:var(--serif); font-size:clamp(20px,2vw,26px); font-weight:400}
+.name{font-size:clamp(64px, 10vw, 148px)}
+.hero-line{max-width:30ch}
+.hero-sub{max-width:44ch}
+.ctas{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+
+.hero-photo{position:relative; display:flex; align-items:flex-end; justify-content:center; padding:48px var(--pad) 0}
+.arch{
+  width:100%; max-width:400px; aspect-ratio:3/4;
+  border-radius:999px 999px 0 0; overflow:hidden; position:relative;
+  background:linear-gradient(170deg, #f3d9c4 0%, #e9a58a 45%, #b98ad8 100%);
+}
+.arch img{width:100%; height:100%; object-fit:cover}
+.arch .ph{position:absolute; inset:auto 0 24px; text-align:center; font-size:13px; color:rgba(26,26,24,.6)}
+.badge{position:absolute; left:calc(50% - 230px); bottom:36px; width:124px; height:124px}
+.badge svg{width:100%; height:100%; animation:spin 26s linear infinite}
+.badge text{font:600 11.5px var(--sans); letter-spacing:.14em; fill:var(--ink)}
+.badge .core{position:absolute; inset:36%; border-radius:50%; background:var(--ink)}
+
+.hero-stats{border-left:1px solid var(--rule); padding:var(--gap-y) var(--pad) 48px; display:flex; flex-direction:column; justify-content:flex-end; gap:26px; text-align:right}
+.stat b{display:block; font-family:var(--serif); font-weight:800; font-variation-settings:"opsz" 144; font-size:clamp(34px,3.6vw,48px); line-height:1; letter-spacing:-.03em}
+.stat span{display:block; font-size:13.5px; line-height:1.35; color:var(--soft); margin-top:4px}
+
+.focus{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--rule); background:color-mix(in srgb, var(--paper) 70%, transparent)}
+.focus div{padding:22px var(--pad) 26px}
+.focus div + div{border-left:1px solid var(--rule)}
+.focus h3{font:650 15px/1.3 var(--sans); margin-bottom:6px}
+
+/* ---------- sections ---------- */
+.sec{border-top:1px solid var(--rule)}
+.sec-in{padding:var(--gap-y) var(--pad)}
+.split{display:grid; grid-template-columns:5fr 7fr; gap:clamp(28px,5vw,72px); align-items:start}
+
+/* hand-drawn ellipse around a heading */
+.circled{position:relative; display:inline-block; padding:.08em .12em}
+.circled svg{position:absolute; inset:-22% -12%; width:124%; height:144%; overflow:visible; pointer-events:none}
+.circled path{fill:none; stroke:var(--ink); stroke-width:1.4; vector-effect:non-scaling-stroke}
+
+/* about */
+.about-body p + p{margin-top:1em}
+.about-body .lead{margin-bottom:1.1em}
+.film{margin-top:clamp(40px,6vw,72px)}
+.film-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-bottom:14px}
+.film-head h3{font-family:var(--serif); font-weight:500; font-style:italic; font-size:22px}
+.strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+  background:#1c1a17; padding:26px 12px; border-radius:4px; position:relative;
+}
+.strip::before,.strip::after{
+  content:""; position:absolute; left:12px; right:12px; height:8px;
+  background:repeating-linear-gradient(90deg, #e8e2d6 0 10px, transparent 10px 22px);
+  opacity:.8;
+}
+.strip::before{top:9px}.strip::after{bottom:9px}
+.frame-photo{aspect-ratio:3/2; border-radius:2px; overflow:hidden; position:relative}
+.frame-photo img{width:100%; height:100%; object-fit:cover}
+.frame-photo figcaption{position:absolute; left:8px; bottom:6px; font-size:12px; color:rgba(255,255,255,.85)}
+
+/* story timeline */
+.story-head{display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:clamp(36px,5vw,64px); flex-wrap:wrap}
+.tl{list-style:none; padding:0; position:relative}
+.tl > li{display:grid; grid-template-columns:170px 1fr; position:relative}
+.tl .yr{font-family:var(--serif); font-weight:700; font-variation-settings:"opsz" 72; font-size:22px; padding:6px 24px 44px 0; text-align:right; letter-spacing:-.01em}
+.tl .body{border-left:1px solid var(--ink); padding:0 0 44px 32px; position:relative; max-width:720px}
+.tl .body::before{content:""; position:absolute; left:-6px; top:15px; width:11px; height:11px; border-radius:50%; background:var(--paper); border:1px solid var(--ink)}
+.tl > li:first-child .body::before{background:var(--red); border-color:var(--red)}
+.tl > li:last-child .body{padding-bottom:0}
+.tl-head{display:flex; align-items:center; gap:14px; margin-bottom:8px}
+.tl h3{font:650 18px/1.3 var(--sans)}
+.hl{padding-left:1.1em; margin-top:10px}
+.hl li{font-size:15px; color:var(--soft); line-height:1.5; margin-top:5px}
+.hl li::marker{color:var(--red)}
+.tl .tags{margin-top:12px}
+
+/* logos: drop files in /logos; monogram shows until then */
+.logo{width:46px; height:46px; flex:none; border-radius:10px; background:#fff; border:1px solid var(--rule); display:grid; place-items:center; overflow:hidden}
+.logo img{width:100%; height:100%; object-fit:contain; padding:6px;
+  filter:grayscale(1) contrast(1.05); /* delete this line for full-colour logos */}
+.logo.mono{background:var(--ink); color:var(--paper); font:700 12.5px/1 var(--sans); letter-spacing:.01em; border-color:var(--ink)}
+
+/* education + certs */
+.two{display:grid; grid-template-columns:1fr 1fr}
+.two > div{padding:var(--gap-y) var(--pad)}
+.two > div + div{border-left:1px solid var(--rule)}
+.two .h2{font-size:clamp(44px,5.6vw,80px)}
+.list{list-style:none; padding:0; margin-top:clamp(28px,4vw,44px)}
+.list li{display:grid; grid-template-columns:1fr auto; gap:6px 16px; padding:18px 0; border-top:1px solid var(--rule)}
+.list li:last-child{border-bottom:1px solid var(--rule)}
+.list h3{font-family:var(--serif); font-weight:600; font-variation-settings:"opsz" 48; font-size:22px; line-height:1.2; letter-spacing:-.01em}
+.list .yr{font-size:14px; color:var(--soft); white-space:nowrap; padding-top:4px}
+.list p{grid-column:1 / -1}
+.list li.wl{grid-template-columns:auto 1fr auto; gap:4px 16px}
+.list li.wl .logo{grid-row:1 / span 3}
+.list li.wl > p, .list li.wl > .notes{grid-column:2 / -1}
+.notes{list-style:none; padding:0; margin-top:6px}
+.notes li{font-size:14.5px; color:var(--soft); line-height:1.45; padding:0; border:0; display:block; margin-top:3px}
+.notes li:last-child{border:0}
+
+/* toolkit */
+.kit{list-style:none; padding:0; margin-top:clamp(28px,4vw,44px)}
+.kit li{display:grid; grid-template-columns:minmax(180px,1fr) 3fr; gap:6px 32px; padding:16px 0; border-top:1px solid var(--rule)}
+.kit li:last-child{border-bottom:1px solid var(--rule)}
+.kit h3{font:650 15.5px/1.45 var(--sans)}
+.kit p{font-size:15.5px; color:var(--soft)}
+
+/* projects */
+.proj-head{display:flex; align-items:baseline; justify-content:space-between; gap:24px; padding:var(--gap-y) var(--pad) clamp(32px,4vw,48px); overflow:hidden; white-space:nowrap}
+.outline{color:transparent; -webkit-text-stroke:1px var(--ink); opacity:.55}
+.proj-grid{display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--rule); margin-bottom:-1px}
+.card{padding:var(--pad); display:grid; grid-template-columns:minmax(0,.72fr) 1fr; gap:28px; align-items:start; border-bottom:1px solid var(--rule)}
+.card:nth-child(odd){border-right:1px solid var(--rule)}
+.card{background:
+  radial-gradient(90% 80% at 100% 0%, color-mix(in srgb, var(--tint) 26%, transparent), transparent 70%),
+  linear-gradient(180deg, color-mix(in srgb, var(--tint) 7%, transparent), color-mix(in srgb, var(--tint) 14%, transparent))}
+.card .tags li{background:color-mix(in srgb, var(--paper) 70%, transparent)}
+.card-body{display:flex; flex-direction:column; gap:12px; height:100%}
+.card-visual{aspect-ratio:3/4; border-radius:999px 999px 0 0; overflow:hidden; background:var(--cell)}
+.card-visual svg,.card-visual img{width:100%; height:100%; object-fit:cover; display:block}
+.card .where{font-size:13.5px; color:var(--soft); margin-top:-6px}
+.status{align-self:flex-start; font:600 12.5px/1 var(--sans); padding:6px 10px; border-radius:999px; border:1px solid var(--ink)}
+.status[data-s="progress"]{background:var(--yellow); border-color:var(--yellow)}
+.status[data-s="shipped"]{background:var(--ink); color:var(--paper)}
+.card h3{font-family:var(--serif); font-weight:750; font-variation-settings:"opsz" 96; font-size:28px; line-height:1.05; letter-spacing:-.025em}
+.tags{display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0}
+.tags li{font-size:13px; padding:4px 10px; border-radius:999px; background:var(--cell); border:1px solid var(--rule)}
+.links{display:flex; gap:18px; margin-top:auto; padding-top:8px}
+.links a{font-weight:600; font-size:15px; text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:2px}
+.links a:hover{border-color:var(--red); color:var(--red)}
+
+/* resume band */
+.resume{position:relative; overflow:hidden; isolation:isolate}
+.resume .blob{filter:blur(80px)}
+.resume .r1{width:520px; aspect-ratio:1; right:-6%; top:-40%; background:var(--orange)}
+.resume .r2{width:420px; aspect-ratio:1; right:22%; top:10%; background:var(--violet); opacity:.5}
+.resume .r3{width:320px; aspect-ratio:1; right:8%; bottom:-40%; background:var(--yellow)}
+.resume-in{display:flex; align-items:end; justify-content:space-between; gap:32px; flex-wrap:wrap; padding:var(--gap-y) var(--pad)}
+.resume-btns{display:flex; gap:10px; flex-wrap:wrap}
+
+/* contact */
+.email{
+  display:inline-block; margin-top:clamp(24px,3vw,36px);
+  font-family:var(--serif); font-weight:500; font-variation-settings:"opsz" 96;
+  font-size:clamp(26px,3.2vw,44px); letter-spacing:-.02em; line-height:1.15;
+  text-decoration:none; border-bottom:2px solid var(--ink); overflow-wrap:anywhere;
+}
+.email:hover{color:var(--red); border-color:var(--red)}
+.socials{list-style:none; padding:0}
+.socials li{border-top:1px solid var(--rule)}
+.socials li:last-child{border-bottom:1px solid var(--rule)}
+.socials a{display:flex; justify-content:space-between; align-items:center; padding:18px 0; text-decoration:none; font-family:var(--serif); font-size:26px; font-weight:500; letter-spacing:-.01em}
+.socials a:hover{color:var(--red)}
+.socials a span{font-family:var(--sans); font-size:18px}
+
+/* footer */
+.foot{border-top:1px solid var(--rule); padding:clamp(40px,6vw,72px) var(--pad) calc(28px + env(safe-area-inset-bottom,0px));
+  background:
+    radial-gradient(38% 75% at 30% 105%, rgba(122,85,216,.40), transparent 70%),
+    radial-gradient(34% 70% at 58% 85%, rgba(232,35,63,.38), transparent 70%),
+    radial-gradient(40% 85% at 78% 55%, rgba(255,106,26,.50), transparent 70%),
+    radial-gradient(28% 60% at 92% 12%, rgba(255,180,42,.50), transparent 70%),
+    radial-gradient(30% 70% at 2% 30%, rgba(158,197,236,.45), transparent 70%),
+    var(--paper)}
+.foot .big{font-size:clamp(110px, 22vw, 300px); line-height:.8}
+.foot-row{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:28px; font-size:14px; font-weight:500; color:var(--ink)}
+.foot-row a{text-decoration:none}
+.foot-row a:hover{text-decoration:underline}
+
+/* ---------- motion: one bloom on load ---------- */
+@keyframes bloom{from{transform:scale(.35); opacity:0}}
+@keyframes drift{to{transform:translate(4%, 6%) scale(1.08)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .blob{animation:bloom 1.8s cubic-bezier(.2,.7,.2,1) both, drift 18s ease-in-out 1.8s infinite alternate}
+.hero .b2{animation-delay:.12s, 1.9s}.hero .b3{animation-delay:.24s, 2s}.hero .b4{animation-delay:.08s, 2.1s}.hero .b5{animation-delay:.3s, 2.2s}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .hero .blob, .badge svg{animation:none}
+  .heat-cursor{display:none}
+  .btn{transition:none}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px){
+  .hero-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-column:1 / -1; border-left:0; border-top:1px solid var(--rule); flex-direction:row; flex-wrap:wrap; justify-content:space-between; text-align:left; padding:28px var(--pad)}
+  .focus{grid-template-columns:1fr 1fr}
+  .focus div:nth-child(3){border-left:0}
+  .focus div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .proj-grid{grid-template-columns:1fr}
+  .card:nth-child(odd){border-right:0}
+  .badge{left:8px}
+}
+@media (max-width: 760px){
+  .nav{display:none}
+  .lang{margin-left:auto}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding-top:40px; order:2}
+  .hero-photo{order:1; padding-top:32px}
+  .hero-stats{order:3}
+  .arch{max-width:300px}
+  .badge{left:calc(50% - 170px); bottom:20px; width:104px; height:104px}
+  .split,.two{grid-template-columns:1fr}
+  .two > div + div{border-left:0; border-top:1px solid var(--rule)}
+  .strip{grid-template-columns:1fr 1fr}
+  .tl > li{grid-template-columns:1fr}
+  .tl .yr{text-align:left; padding:0 0 6px 32px; border-left:1px solid var(--ink)}
+  .proj-head .outline{display:none}
+  .card{grid-template-columns:1fr}
+  .card-visual{aspect-ratio:4/3}
+  .kit li{grid-template-columns:1fr}
+  .focus{grid-template-columns:1fr}
+  .focus div + div{border-left:0; border-top:1px solid var(--rule)}
+  .top .btn{display:none}
+  .b1{width:95vw; left:5%; top:0}
+  .b2{width:75vw; left:30%; top:16%}
+  .b4{width:55vw; left:50%; top:-4%}
+  .b3{width:70vw; left:-10%; top:40%}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="frame top-in" style="border-inline:0">
+    <a class="mark" href="#top" aria-label="Artem Zhdanov, home">az.</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#experience" data-i18n="nav_story">Experience</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+    </div>
+    <a class="btn btn--sm js-resume" href="#" download data-i18n="nav_resume">Resume</a>
+  </div>
+</header>
+
+<main class="frame" id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="heat" aria-hidden="true">
+      <div class="blob b5"></div><div class="blob b3"></div><div class="blob b1"></div>
+      <div class="blob b2"></div><div class="blob b4"></div>
+      <div class="heat-cursor"></div>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hi" data-i18n="hero_hi">Hey, I'm Az.</p>
+        <h1 class="display name">artem<br>zhdanov.</h1>
+        <p class="lead hero-line" data-i18n="hero_line"></p>
+        <p class="small hero-sub" data-i18n="hero_sub"></p>
+        <div class="ctas">
+          <a class="btn" href="#contact" data-i18n="cta_contact">Get in touch</a>
+          <a class="btn btn--ghost js-resume" href="#" download data-i18n="cta_resume">Download resume</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <div class="arch" id="portrait"></div>
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text><textPath href="#circ">OPEN TO WORK ✺ DISPONIBLE ✺ </textPath></text>
+          </svg>
+          <div class="core"></div>
+        </div>
+      </div>
+
+      <div class="hero-stats" id="stats"></div>
+    </div>
+
+    <div class="focus" id="focus"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="sec" id="about">
+    <div class="sec-in">
+      <div class="split">
+        <h2 class="display h2">
+          <span class="circled"><span data-i18n="about_title">about me.</span>
+            <svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M40,70 C30,28 150,6 240,20 C300,30 296,86 210,102 C130,116 26,104 14,70 C6,46 60,22 128,16"/></svg>
+          </span>
+        </h2>
+        <div class="about-body measure">
+          <p class="lead" data-i18n="about_lead"></p>
+          <p data-i18n="about_p1"></p>
+          <p data-i18n="about_p2"></p>
+        </div>
+      </div>
+
+      <div class="film">
+        <div class="film-head">
+          <h3 data-i18n="film_title">Off the clock, on film.</h3>
+          <p class="small" data-i18n="film_note">Shot on a Canon AE-1.</p>
+        </div>
+        <div class="strip" id="film"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="sec" id="experience">
+    <div class="sec-in">
+      <div class="story-head">
+        <h2 class="display h2" data-i18n="story_title">experience.</h2>
+        <p class="small measure" style="max-width:36ch" data-i18n="story_intro"></p>
+      </div>
+      <ol class="tl" id="timeline"></ol>
+    </div>
+  </section>
+
+  <!-- EDUCATION + CERTIFICATIONS -->
+  <section class="sec two" id="education">
+    <div>
+      <h2 class="display h2" data-i18n="edu_title">education.</h2>
+      <ul class="list" id="edu"></ul>
+    </div>
+    <div>
+      <h2 class="display h2" data-i18n="cert_title">certifications.</h2>
+      <ul class="list" id="certs"></ul>
+    </div>
+  </section>
+
+  <!-- TOOLKIT -->
+  <section class="sec" id="toolkit">
+    <div class="sec-in">
+      <h2 class="display h2" data-i18n="kit_title">toolkit.</h2>
+      <ul class="kit" id="kit"></ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="sec" id="projects">
+    <div class="proj-head display h2" aria-hidden="false">
+      <span class="outline" aria-hidden="true" data-i18n="proj_word">projects</span>
+      <h2 style="font:inherit" data-i18n="proj_title">projects.</h2>
+      <span class="outline" aria-hidden="true" data-i18n="proj_word">projects</span>
+    </div>
+    <div class="proj-grid" id="proj"></div>
+  </section>
+
+  <!-- RESUME -->
+  <section class="sec resume" id="resume">
+    <div class="heat" aria-hidden="true"><div class="blob r2"></div><div class="blob r1"></div><div class="blob r3"></div></div>
+    <div class="resume-in">
+      <div>
+        <h2 class="display h2" data-i18n="resume_title">resume.</h2>
+        <p class="small" style="margin-top:14px" data-i18n="resume_note"></p>
+      </div>
+      <div class="resume-btns">
+        <a class="btn" id="resume-en" href="#" download data-i18n="resume_en">English (PDF)</a>
+        <a class="btn btn--ghost" id="resume-fr" href="#" download data-i18n="resume_fr">Français (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact">
+    <div class="sec-in split">
+      <div>
+        <h2 class="display h2" data-i18n="contact_title">let's talk.</h2>
+        <p class="lead" style="margin-top:22px; max-width:26ch" data-i18n="contact_text"></p>
+        <a class="email" id="email-link" href="#"></a>
+      </div>
+      <div>
+        <p class="small" style="margin-bottom:14px" data-i18n="contact_where">Based in Grenoble, France</p>
+        <ul class="socials" id="socials"></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="display big" aria-hidden="true">az.</p>
+    <div class="foot-row">
+      <span>© <span id="year">2026</span> Artem Zhdanov</span>
+      <span data-i18n="foot_made">Made in Grenoble</span>
+      <a href="#top" data-i18n="foot_top">Back to top</a>
+    </div>
+  </footer>
+</main>
+
+<script>
+/* ============================================================
+   CONTENT — edit everything below. Each text has { en, fr }.
+   Logos: put the files in a "logos" folder next to index.html,
+   named as below. Until a file exists, a monogram shows instead.
+   ============================================================ */
+const CONTENT = {
+  links: {
+    email:    "a.zzhdanov@gmail.com",
+    github:   "https://github.com/azzhdanov",
+    linkedin: "https://www.linkedin.com/in/zhdanovartem/",
+    instagram:"",                                        // leave "" to hide
+    resumeEn: "resume-en.pdf",
+    resumeFr: "cv-fr.pdf"
+  },
+
+  portrait: "",                  // e.g. "images/portrait.jpg"
+
+  ui: {
+    en: {
+      title: "Artem Zhdanov — Senior software engineer",
+      nav_about:"About", nav_story:"Experience", nav_projects:"Projects", nav_contact:"Contact", nav_resume:"Resume",
+      hero_hi:"Hey, I'm Az.",
+      hero_line:"Senior software engineer. Five years shipping enterprise systems, now building AI for energy and climate data.",
+      hero_sub:"In Grenoble for a research exchange at Université Grenoble Alpes (MoSIG). Available for a research internship, March to August 2027.",
+      cta_contact:"Get in touch", cta_resume:"Download resume",
+      portrait_ph:"Your portrait goes here",
+      about_title:"about me.",
+      about_lead:"I build software that has to work on Monday morning. Now I want it to help run cleaner energy systems.",
+      about_p1:"For four and a half years at Purolator, one of Canada's largest logistics companies, I shipped ERP integrations, carbon accounting infrastructure and production AI agents. Rebuilding one integration surfaced $3M in missed revenue. Designing the Scope 1 to 3 data models for Net Zero Cloud showed me where I want to spend my career.",
+      about_p2:"I'm now in Grenoble on a research exchange at Université Grenoble Alpes, taking master's courses in AI and cloud computing while finishing my computer science degree at TMU. I speak English, French and Russian.",
+      film_title:"Off the clock, on film.", film_note:"Shot on a Canon AE-1.",
+      story_title:"experience.",
+      story_intro:"Five years of production engineering, most recent first.",
+      kit_title:"toolkit.",
+      edu_title:"education.", cert_title:"certifications.",
+      proj_word:"projects", proj_title:"projects.",
+      st_progress:"In development", st_shipped:"In production", st_concept:"Concept",
+      resume_title:"resume.",
+      resume_note:"Two pages, updated September 2026.",
+      resume_en:"English (PDF)", resume_fr:"Français (PDF)",
+      contact_title:"let's talk.",
+      contact_text:"Looking for a research internship (March to August 2027) and permanent engineering roles in Grenoble.",
+      contact_where:"Based in Grenoble, France",
+      foot_made:"Made in Grenoble", foot_top:"Back to top"
+    },
+    fr: {
+      title: "Artem Zhdanov — Ingénieur logiciel senior",
+      nav_about:"À propos", nav_story:"Expérience", nav_projects:"Projets", nav_contact:"Contact", nav_resume:"CV",
+      hero_hi:"Bonjour, moi c'est Az.",
+      hero_line:"Ingénieur logiciel senior. Cinq ans de systèmes d'entreprise en production, aujourd'hui tourné vers l'IA pour l'énergie et le climat.",
+      hero_sub:"À Grenoble pour un échange de recherche à l'Université Grenoble Alpes (MoSIG). Disponible pour un stage de recherche de mars à août 2027.",
+      cta_contact:"Me contacter", cta_resume:"Télécharger le CV",
+      portrait_ph:"Votre portrait ici",
+      about_title:"à propos.",
+      about_lead:"Je construis des logiciels qui doivent marcher le lundi matin. Aujourd'hui, je veux qu'ils aident à faire tourner des systèmes énergétiques plus propres.",
+      about_p1:"Pendant quatre ans et demi chez Purolator, l'un des plus grands logisticiens du Canada, j'ai livré des intégrations ERP, une infrastructure de comptabilité carbone et des agents IA en production. La refonte d'une intégration a permis d'identifier 3 M$ CA de revenus non facturés. Concevoir les modèles de données des scopes 1 à 3 pour Net Zero Cloud m'a montré où je voulais consacrer ma carrière.",
+      about_p2:"Je suis maintenant à Grenoble pour un échange de recherche à l'Université Grenoble Alpes, où je suis des cours de master en IA et en cloud computing tout en terminant mon bachelor en informatique à TMU. Je parle anglais, français et russe.",
+      film_title:"Hors du bureau, en argentique.", film_note:"Pris au Canon AE-1.",
+      story_title:"expérience.",
+      story_intro:"Cinq ans d'ingénierie en production, du plus récent au plus ancien.",
+      kit_title:"compétences.",
+      edu_title:"formation.", cert_title:"certifications.",
+      proj_word:"projets", proj_title:"projets.",
+      st_progress:"En développement", st_shipped:"En production", st_concept:"Concept",
+      resume_title:"cv.",
+      resume_note:"Deux pages, mis à jour en septembre 2026.",
+      resume_en:"English (PDF)", resume_fr:"Français (PDF)",
+      contact_title:"écrivez-moi.",
+      contact_text:"Je cherche un stage de recherche (mars à août 2027) et un poste d'ingénieur en CDI à Grenoble.",
+      contact_where:"Basé à Grenoble, France",
+      foot_made:"Fait à Grenoble", foot_top:"Haut de page"
+    }
+  },
+
+  stats: [
+    { value:"5",   label:{ en:"years in production", fr:"ans en production" } },
+    { value:{ en:"$3M", fr:"3 M$" }, label:{ en:"missed revenue surfaced", fr:"de revenus récupérés" } },
+    { value:"0",   label:{ en:"production incidents", fr:"incident en production" } },
+    { value:"3",   label:{ en:"languages: EN, FR, RU", fr:"langues : EN, FR, RU" } }
+  ],
+
+  focus: [
+    { title:{ en:"AI for energy and climate", fr:"IA pour l'énergie et le climat" }, text:{ en:"Forecasting and RAG on real emissions and energy data.", fr:"Prévision et RAG sur de vraies données d'émissions et d'énergie." } },
+    { title:{ en:"Enterprise integrations", fr:"Intégrations d'entreprise" }, text:{ en:"ERP, SAP S/4HANA, REST and SOAP at national scale.", fr:"ERP, SAP S/4HANA, REST et SOAP à l'échelle nationale." } },
+    { title:{ en:"Carbon accounting", fr:"Comptabilité carbone" }, text:{ en:"GHG Scopes 1 to 3 and ESG reporting.", fr:"GES, scopes 1 à 3 et reporting ESG." } },
+    { title:{ en:"Full-stack and cloud", fr:"Full-stack et cloud" }, text:{ en:"React, FastAPI, AWS and CI/CD.", fr:"React, FastAPI, AWS et CI/CD." } }
+  ],
+
+  photos: [
+    { src:"", caption:{ en:"Grenoble", fr:"Grenoble" } },
+    { src:"", caption:{ en:"Toronto",  fr:"Toronto" } },
+    { src:"", caption:{ en:"Kitchen",  fr:"Cuisine" } },
+    { src:"", caption:{ en:"Friends",  fr:"Amis" } }
+  ],
+
+  timeline: [
+    { year:{ en:"Next", fr:"Ensuite" },
+      title:{ en:"Research internship, March to August 2027", fr:"Stage de recherche, de mars à août 2027" },
+      org:{ en:"Grenoble ecosystem", fr:"Écosystème grenoblois" },
+      text:{ en:"Full-time, on AI for energy and environmental systems. Convention de stage available through UGA.", fr:"À temps plein, sur l'IA pour les systèmes énergétiques et environnementaux. Convention de stage délivrée par l'UGA." } },
+
+    { year:"2022–2026", logo:"logos/purolator.jpg", mono:"P",
+      title:{ en:"Technology Developer", fr:"Ingénieur logiciel (Technology Developer)" },
+      org:{ en:"Purolator Inc., Mississauga", fr:"Purolator Inc., Mississauga" },
+      highlights:[
+        { en:"Replaced a legacy SQL Server interface inside an ERP integration: 30% lower licensing costs and 75% fewer invoice errors.", fr:"Remplacement d'une interface SQL Server critique dans une intégration ERP : coûts de licences réduits de 30 %, erreurs de facturation réduites de 75 %." },
+        { en:"Surfaced $3M in missed revenue with real-time error logging and automated reconciliation.", fr:"3 M$ CA de revenus non facturés identifiés grâce à la journalisation en temps réel et au rapprochement automatisé." },
+        { en:"Architected Scope 1, 2 and 3 carbon accounting data models for Net Zero Cloud: 400+ components over 7 releases.", fr:"Conception des modèles de données carbone (scopes 1, 2 et 3) pour Net Zero Cloud : plus de 400 composants sur 7 mises en production." },
+        { en:"Built production AI agents for Sales and Customer Care, raising team productivity by 25%.", fr:"Agents IA en production pour les équipes commerciales et service client : productivité en hausse de 25 %." },
+        { en:"Owned CI/CD and releases: 400+ merge requests and 12+ deployments a year, with zero production incidents.", fr:"Responsable de la CI/CD et des mises en production : plus de 400 merge requests et plus de 12 déploiements par an, sans aucun incident." }
+      ],
+      tags:["Salesforce","Apex","Java","Python","AWS","SAP S/4HANA"] },
+
+    { year:"2021", logo:"logos/nc-research-innovation.jpg", mono:"R&I",
+      title:{ en:"Computer Programmer, Research Assistant", fr:"Développeur, assistant de recherche" },
+      org:{ en:"Niagara College Research & Innovation, Welland", fr:"Niagara College Research & Innovation, Welland" },
+      highlights:[
+        { en:"Built full-stack applications for large-scale soil and mineral analysis, with interactive data visualizations for applied research.", fr:"Applications full-stack pour l'analyse à grande échelle de sols et de minéraux, avec visualisations interactives pour la recherche appliquée." },
+        { en:"Made queries up to 40% faster and cut storage costs by 25% on large agricultural datasets.", fr:"Requêtes jusqu'à 40 % plus rapides et coûts de stockage réduits de 25 % sur de larges jeux de données agricoles." },
+        { en:"Shipped a customer-facing web platform two months ahead of schedule.", fr:"Plateforme web client livrée avec deux mois d'avance." }
+      ],
+      tags:["Python","C#",".NET","PostgreSQL","MongoDB","Angular"] }
+  ],
+
+  toolkit: [
+    { label:{ en:"Programming languages", fr:"Langages de programmation" }, items:{ en:"Python, Java, C, C++, C#, JavaScript, TypeScript, SQL, R, Apex, Bash", fr:"Python, Java, C, C++, C#, JavaScript, TypeScript, SQL, R, Apex, Bash" } },
+    { label:{ en:"Machine learning and data", fr:"Machine learning et données" }, items:{ en:"PyTorch, scikit-learn, NumPy, pandas, LLM applications, RAG, prompt engineering, data pipelines, ETL", fr:"PyTorch, scikit-learn, NumPy, pandas, applications LLM, RAG, prompt engineering, pipelines de données, ETL" } },
+    { label:{ en:"Scientific computing", fr:"Calcul scientifique" }, items:{ en:"Numerical methods, linear algebra, parallel and concurrent programming, OS internals, Linux/Unix, image processing", fr:"Méthodes numériques, algèbre linéaire, programmation parallèle et concurrente, systèmes d'exploitation, Linux/Unix, traitement d'images" } },
+    { label:{ en:"Backend and integration", fr:"Backend et intégration" }, items:{ en:"REST and SOAP APIs, FastAPI, Node.js, ASP.NET Core, microservices, SAP S/4HANA, message-driven architectures", fr:"API REST et SOAP, FastAPI, Node.js, ASP.NET Core, microservices, SAP S/4HANA, architectures orientées messages" } },
+    { label:{ en:"Frontend", fr:"Frontend" }, items:{ en:"React, Angular, TypeScript, HTML, CSS, Bootstrap, Lightning Web Components", fr:"React, Angular, TypeScript, HTML, CSS, Bootstrap, Lightning Web Components" } },
+    { label:{ en:"Cloud and DevOps", fr:"Cloud et DevOps" }, items:{ en:"AWS, Azure, Salesforce Platform, Git, GitHub, GitLab, CI/CD, GitOps, release management, Agile", fr:"AWS, Azure, plateforme Salesforce, Git, GitHub, GitLab, CI/CD, GitOps, gestion des mises en production, Agile" } },
+    { label:{ en:"Databases and BI", fr:"Bases de données et BI" }, items:{ en:"PostgreSQL, SQL Server, MongoDB, Power BI, Tableau", fr:"PostgreSQL, SQL Server, MongoDB, Power BI, Tableau" } },
+    { label:{ en:"Domain", fr:"Domaine" }, items:{ en:"Carbon accounting (GHG Scopes 1 to 3), ESG reporting, energy systems data, environmental analytics, logistics", fr:"Comptabilité carbone (GES, scopes 1 à 3), reporting ESG, données énergétiques, analyse environnementale, logistique" } },
+    { label:{ en:"Spoken languages", fr:"Langues" }, items:{ en:"English (native/bilingual), French (fluent), Russian (native), Spanish (limited)", fr:"Anglais (bilingue), français (courant), russe (langue maternelle), espagnol (notions)" } }
+  ],
+
+  education: [
+    { logo:"logos/uga.jpg", mono:"UGA",
+      title:{ en:"Exchange year, graduate coursework in Informatics (MoSIG)", fr:"Année d'échange, cursus de niveau master en informatique (MoSIG)" },
+      where:{ en:"Université Grenoble Alpes, Grenoble", fr:"Université Grenoble Alpes, Grenoble" }, year:"2026–27",
+      notes:[ { en:"Visual computing, artificial intelligence, programming languages and compiler design.", fr:"Informatique visuelle, intelligence artificielle, langages de programmation et compilation." } ] },
+    { logo:"logos/tmu.jpg", mono:"TMU",
+      title:{ en:"BSc (Honours), Computer Science", fr:"Bachelor of Science (Honours) en informatique" },
+      where:{ en:"Toronto Metropolitan University, Toronto", fr:"Toronto Metropolitan University, Toronto" }, year:"2025–27",
+      notes:[ { en:"Dean's List 2025, Faculty of Science.", fr:"Tableau d'honneur du doyen (Dean's List) 2025, Faculté des sciences." } ] },
+    { logo:"logos/niagara-college.jpg", mono:"NC",
+      title:{ en:"Advanced Diploma, Computer Programming and Analysis (Co-op)", fr:"Advanced Diploma en programmation et analyse informatique (co-op)" },
+      where:{ en:"Niagara College, Welland", fr:"Niagara College, Welland" }, year:"2019–21",
+      notes:[ { en:"President's Honour Roll for five terms.", fr:"Tableau d'honneur du président pendant cinq semestres." },
+              { en:"Keith Segal International Student Scholarship (2021).", fr:"Bourse Keith Segal pour étudiants internationaux (2021)." } ] }
+  ],
+
+  certifications: [
+    { title:{ en:"Salesforce Certified Advanced Administrator", fr:"Salesforce Certified Advanced Administrator" }, where:{ en:"Salesforce, credential 3992685", fr:"Salesforce, identifiant 3992685" }, year:"2023" },
+    { title:{ en:"Salesforce Certified Administrator", fr:"Salesforce Certified Administrator" }, where:{ en:"Salesforce, credential 2811244", fr:"Salesforce, identifiant 2811244" }, year:"2022" }
+  ],
+
+  // status: "progress" | "shipped" | "concept". image "" = generated heat map.
+  projects: [
+    { status:"progress", seed:7, tint:"#FF6A1A", image:"",
+      title:{ en:"Emissions Forecasting & Climate Policy Assistant", fr:"Emissions Forecasting & Climate Policy Assistant" },
+      where:{ en:"Personal project", fr:"Projet personnel" },
+      text:{ en:"Makes Canada's national greenhouse gas inventory searchable and forecastable in plain language, built on open data from ECCC and Statistics Canada.", fr:"Rend l'inventaire national canadien des gaz à effet de serre interrogeable et projetable en langage naturel, à partir des données ouvertes d'ECCC et de Statistique Canada." },
+      detail:{ en:"PyTorch forecasting with classical baselines and LMDI decomposition, a FastAPI backend and LangChain RAG over policy documents, deployed on AWS.", fr:"Prévisions PyTorch avec baselines classiques et décomposition LMDI, backend FastAPI et RAG LangChain sur des documents de politique publique, déployé sur AWS." },
+      tags:["PyTorch","FastAPI","LangChain","pgvector","AWS"],
+      links:[ { label:{ en:"Code", fr:"Code" }, url:"#" } ] },       // TODO: repo link
+    { status:"shipped", seed:21, tint:"#7A55D8", image:"",
+      title:{ en:"Net Zero Cloud carbon accounting", fr:"Comptabilité carbone Net Zero Cloud" },
+      where:{ en:"Purolator", fr:"Purolator" },
+      text:{ en:"Scope 1, 2 and 3 carbon accounting data models for the sustainability programme of a national logistics company.", fr:"Modèles de données de comptabilité carbone (scopes 1, 2 et 3) pour le programme de durabilité d'un logisticien national." },
+      detail:{ en:"400+ custom components over 7 production releases, making emissions auditable and visible to executives.", fr:"Plus de 400 composants sur mesure en 7 mises en production, pour des émissions auditables et visibles par la direction." },
+      tags:["Salesforce","Apex","GHG Protocol","ESG"],
+      links:[] },
+    { status:"shipped", seed:33, tint:"#E8233F", image:"",
+      title:{ en:"AI agents for Sales and Customer Care", fr:"Agents IA pour le commercial et le service client" },
+      where:{ en:"Purolator", fr:"Purolator" },
+      text:{ en:"Production AI agents with custom prompt engineering that retrieve data and automate routine tasks for two national teams.", fr:"Agents IA en production, avec des prompts conçus sur mesure, qui récupèrent les données et automatisent les tâches courantes pour deux équipes nationales." },
+      detail:{ en:"Team productivity up 25%.", fr:"Productivité des équipes en hausse de 25 %." },
+      tags:["LLM agents","Prompt engineering","Salesforce"],
+      links:[] },
+    { status:"concept", seed:42, tint:"#9EC5EC", image:"",
+      title:{ en:"Quantum project", fr:"Projet quantique" },
+      where:{ en:"Personal project", fr:"Projet personnel" },
+      text:{ en:"Placeholder: the problem, what you're building, and why it matters, in two sentences.", fr:"À remplir : le problème, ce que vous construisez et pourquoi c'est important, en deux phrases." },
+      detail:null,
+      tags:["Python","Quantum computing"],
+      links:[ { label:{ en:"Code", fr:"Code" }, url:"#" } ] }
+  ]
+};
+
+/* ============================================================
+   ENGINE — no need to edit below
+   ============================================================ */
+const LS_KEY = "az-lang";
+let lang = pickLang();
+
+function pickLang(){
+  const q = new URLSearchParams(location.search).get("lang");
+  if (q === "en" || q === "fr") return q;
+  try { const s = localStorage.getItem(LS_KEY); if (s === "en" || s === "fr") return s; } catch(e){}
+  return (navigator.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
+}
+const t = v => (v && typeof v === "object") ? (v[lang] ?? v.en) : (v ?? "");
+const ui = k => CONTENT.ui[lang][k] ?? CONTENT.ui.en[k] ?? "";
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function logoFail(img){ const box = img.parentNode; box.classList.add("mono"); box.textContent = box.dataset.mono; }
+function logo(item){
+  if (!item.logo && !item.mono) return "";
+  const m = esc(item.mono || "");
+  return item.logo
+    ? `<span class="logo" data-mono="${m}"><img src="${esc(item.logo)}" alt="" onerror="logoFail(this)"></span>`
+    : `<span class="logo mono">${m}</span>`;
+}
+
+/* seeded heat-map placeholder art */
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; }; }
+function heatArt(seed){
+  const r = rng(seed), cols = ["#9EC5EC","#7A55D8","#E8233F","#FF6A1A","#FFB42A"];
+  let circles = "";
+  for (let i = 0; i < 6; i++){
+    const c = cols[Math.min(4, Math.floor(r()*5 + i*0.35))];
+    circles += `<circle cx="${(r()*300).toFixed(0)}" cy="${(r()*400).toFixed(0)}" r="${(70 + r()*110).toFixed(0)}" fill="${c}" opacity="${(0.55 + r()*0.4).toFixed(2)}"/>`;
+  }
+  return `<svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><filter id="bl${seed}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter></defs><rect width="300" height="400" fill="#EAE9E4"/><g filter="url(#bl${seed})">${circles}</g></svg>`;
+}
+
+function render(){
+  document.documentElement.lang = lang;
+  document.title = ui("title");
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = ui(el.dataset.i18n); });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+
+  const L = CONTENT.links;
+  document.querySelectorAll(".js-resume").forEach(a => a.href = lang === "fr" ? L.resumeFr : L.resumeEn);
+  document.getElementById("resume-en").href = L.resumeEn;
+  document.getElementById("resume-fr").href = L.resumeFr;
+  const mail = document.getElementById("email-link"); mail.href = "mailto:" + L.email; mail.textContent = L.email;
+
+  document.getElementById("portrait").innerHTML = CONTENT.portrait
+    ? `<img src="${esc(CONTENT.portrait)}" alt="Artem Zhdanov">`
+    : `<span class="ph">${esc(ui("portrait_ph"))}</span>`;
+
+  document.getElementById("stats").innerHTML = CONTENT.stats.map(s =>
+    `<div class="stat"><b>${esc(t(s.value))}</b><span>${esc(t(s.label))}</span></div>`).join("");
+
+  document.getElementById("focus").innerHTML = CONTENT.focus.map(f =>
+    `<div><h3>${esc(t(f.title))}</h3><p class="small">${esc(t(f.text))}</p></div>`).join("");
+
+  const tones = ["#c9b8a3,#6f6153","#b7c2c8,#4f5b63","#d8b48f,#7d5a3c","#c4b3c9,#5d4d66"];
+  document.getElementById("film").innerHTML = CONTENT.photos.map((p,i) =>
+    `<figure class="frame-photo" style="background:linear-gradient(150deg,${tones[i%4]})">${p.src ? `<img src="${esc(p.src)}" alt="${esc(t(p.caption))}" loading="lazy">` : ""}<figcaption>${esc(t(p.caption))}</figcaption></figure>`).join("");
+
+  document.getElementById("timeline").innerHTML = CONTENT.timeline.map(i => `
+    <li><span class="yr">${esc(t(i.year))}</span>
+      <div class="body">
+        <div class="tl-head">${logo(i)}<div><h3>${esc(t(i.title))}</h3><p class="small">${esc(t(i.org))}</p></div></div>
+        ${i.text ? `<p class="small measure">${esc(t(i.text))}</p>` : ""}
+        ${i.highlights ? `<ul class="hl">${i.highlights.map(h => `<li>${esc(t(h))}</li>`).join("")}</ul>` : ""}
+        ${i.tags ? `<ul class="tags">${i.tags.map(g => `<li>${esc(g)}</li>`).join("")}</ul>` : ""}
+      </div></li>`).join("");
+
+  document.getElementById("kit").innerHTML = CONTENT.toolkit.map(k =>
+    `<li><h3>${esc(t(k.label))}</h3><p>${esc(t(k.items))}</p></li>`).join("");
+
+  const listItem = i => `<li class="${i.logo || i.mono ? "wl" : ""}">${logo(i)}<h3>${esc(t(i.title))}</h3><span class="yr">${esc(i.year)}</span><p class="small">${esc(t(i.where))}</p>${i.notes ? `<ul class="notes">${i.notes.map(n => `<li>${esc(t(n))}</li>`).join("")}</ul>` : ""}</li>`;
+  document.getElementById("edu").innerHTML = CONTENT.education.map(listItem).join("");
+  document.getElementById("certs").innerHTML = CONTENT.certifications.map(listItem).join("");
+
+  document.getElementById("proj").innerHTML = CONTENT.projects.map(p => `
+    <article class="card" style="--tint:${esc(p.tint || "#FFB42A")}">
+      <div class="card-visual">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : heatArt(p.seed)}</div>
+      <div class="card-body">
+        <span class="status" data-s="${p.status}">${esc(ui("st_" + p.status))}</span>
+        <h3>${esc(t(p.title))}</h3>
+        <p class="where">${esc(t(p.where))}</p>
+        <p class="small">${esc(t(p.text))}</p>
+        ${p.detail ? `<p class="small">${esc(t(p.detail))}</p>` : ""}
+        <ul class="tags">${p.tags.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+        ${p.links.length ? `<div class="links">${p.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(t(l.label))} ↗</a>`).join("")}</div>` : ""}
+      </div>
+    </article>`).join("");
+
+  const socials = [["LinkedIn", L.linkedin], ["GitHub", L.github], ["Instagram", L.instagram], ["Email", L.email && "mailto:" + L.email]].filter(s => s[1]);
+  document.getElementById("socials").innerHTML = socials.map(([n,u]) =>
+    `<li><a href="${esc(u)}" ${u.startsWith("mailto") ? "" : 'target="_blank" rel="noopener"'}>${n}<span>↗</span></a></li>`).join("");
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+}
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem(LS_KEY, lang); } catch(e){}
+  render();
+}));
+
+/* hero: heat follows the pointer (skipped with reduced motion) */
+(function(){
+  const hero = document.getElementById("hero");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !hero) return;
+  let tx = 50, ty = 50, x = 50, y = 50, raf = null;
+  const tick = () => {
+    x += (tx - x) * .08; y += (ty - y) * .08;
+    hero.style.setProperty("--mx", x + "%"); hero.style.setProperty("--my", y + "%");
+    raf = (Math.abs(tx - x) + Math.abs(ty - y) > .1) ? requestAnimationFrame(tick) : null;
+  };
+  hero.addEventListener("pointermove", e => {
+    const r = hero.getBoundingClientRect();
+    tx = (e.clientX - r.left) / r.width * 100; ty = (e.clientY - r.top) / r.height * 100;
+    if (!raf) raf = requestAnimationFrame(tick);
+  });
+})();
+
+render();
+</script>
+</body>
+</html>
