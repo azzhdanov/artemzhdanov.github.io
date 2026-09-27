@@ -1,4 +1,4 @@
-  <!doctype html>
+<!doctype html>
   <html lang="en">
   <head>
   <meta charset="utf-8">
@@ -114,8 +114,8 @@
   }
   .hero:hover .heat-cursor{opacity:1}
 
-  .hero-grid{display:grid; grid-template-columns:1.2fr 1fr .62fr; min-height:min(78vh, 760px)}
-  .hero-copy{padding:var(--gap-y) var(--pad) 48px; display:flex; flex-direction:column; justify-content:flex-end; gap:22px}
+  .hero-grid{display:grid; grid-template-columns:1.2fr 1fr .62fr; min-height:calc(100svh - 70px)}
+  .hero-copy{padding:clamp(24px,5vh,64px) var(--pad) clamp(28px,5vh,48px); display:flex; flex-direction:column; justify-content:center; gap:clamp(12px,2vh,22px)}
   .hi{font-family:var(--serif); font-size:clamp(20px,2vw,26px); font-weight:400}
   .name{font-size:clamp(64px, 10vw, 148px)}
   .hero-line{max-width:30ch}
@@ -423,7 +423,6 @@
       <div class="sec-in">
         <div class="story-head">
           <h2 class="display h2" data-i18n="story_title">experience.</h2>
-          <p class="small measure" style="max-width:36ch" data-i18n="story_intro"></p>
         </div>
         <ol class="tl" id="timeline"></ol>
       </div>
@@ -532,7 +531,6 @@
         about_p2:"I'm now in Grenoble on a research exchange at Université Grenoble Alpes, taking master's courses in AI and cloud computing while finishing my computer science degree at TMU. I speak English, French and Russian.",
         film_title:"Off the clock, on film.", film_note:"Shot on an Canon AE-1.",
         story_title:"experience.",
-        story_intro:"Five years of production engineering, most recent first.",
         kit_title:"toolkit.",
         edu_title:"education.", cert_title:"certifications.",
         proj_word:"projects", proj_title:"projects.",
@@ -559,7 +557,6 @@
         about_p2:"Je suis maintenant à Grenoble pour une année d'échange universitaire à l'Université Grenoble Alpes, où je suis des cours de master (M1) en IA et en cloud computing tout en terminant mon bachelor en informatique (Bac+4) à TMU. Je parle anglais, français et russe.",
         film_title:"Hors du bureau, en argentique.", film_note:"Pris à l'Olympus Pen EE-3.",
         story_title:"expérience.",
-        story_intro:"Cinq ans d'ingénierie en production, du plus récent au plus ancien.",
         kit_title:"compétences.",
         edu_title:"formation.", cert_title:"certifications.",
         proj_word:"projets", proj_title:"projets.",
@@ -761,7 +758,6 @@
       <li><span class="yr">${esc(t(i.year))}</span>
         <div class="body">
           <div class="tl-head">${logo(i)}<div><h3>${esc(t(i.title))}</h3><p class="small">${esc(t(i.org))}</p></div></div>
-          ${i.text ? `<p class="small measure">${esc(t(i.text))}</p>` : ""}
           ${i.highlights ? `<ul class="hl">${i.highlights.map(h => `<li>${esc(t(h))}</li>`).join("")}</ul>` : ""}
           ${i.tags ? `<ul class="tags">${i.tags.map(g => `<li>${esc(g)}</li>`).join("")}</ul>` : ""}
         </div></li>`).join("");
