@@ -412,7 +412,7 @@ body::after{
       <div class="film">
         <div class="film-head">
           <h3 data-i18n="film_title">Off the clock, on film.</h3>
-          <p class="small" data-i18n="film_note">Shot on a Canon AE-1.</p>
+          <p class="small" data-i18n="film_note">Shot on an Olympus Pen EE-3</p>
         </div>
         <div class="strip" id="film"></div>
       </div>
@@ -516,17 +516,17 @@ const CONTENT = {
     resumeFr: "cv-fr.pdf"
   },
 
-  portrait: "",                  // e.g. "images/portrait.jpg"
+  portrait: "images/portrait.jpg",                 
 
   ui: {
     en: {
       title: "Artem Zhdanov — Senior software engineer",
       nav_about:"About", nav_story:"Experience", nav_projects:"Projects", nav_contact:"Contact", nav_resume:"Resume",
-      hero_hi:"Hey, I'm Az.",
+      hero_hi:"Hello, I'm ",
       hero_line:"Senior software engineer. Five years shipping enterprise systems, now building AI for energy and climate data.",
       hero_sub:"In Grenoble for a research exchange at Université Grenoble Alpes (MoSIG). Available for a research internship, March to August 2027.",
       cta_contact:"Get in touch", cta_resume:"Download resume",
-      portrait_ph:"Your portrait goes here",
+      portrait_ph:"",
       about_title:"about me.",
       about_lead:"I build software that has to work on Monday morning. Now I want it to help run cleaner energy systems.",
       about_p1:"For four and a half years at Purolator, one of Canada's largest logistics companies, I shipped ERP integrations, carbon accounting infrastructure and production AI agents. Rebuilding one integration surfaced $3M in missed revenue. Designing the Scope 1 to 3 data models for Net Zero Cloud showed me where I want to spend my career.",
@@ -549,16 +549,16 @@ const CONTENT = {
     fr: {
       title: "Artem Zhdanov — Ingénieur logiciel senior",
       nav_about:"À propos", nav_story:"Expérience", nav_projects:"Projets", nav_contact:"Contact", nav_resume:"CV",
-      hero_hi:"Bonjour, moi c'est Az.",
+      hero_hi:"Bonjour, moi c'est",
       hero_line:"Ingénieur logiciel senior. Cinq ans de systèmes d'entreprise en production, aujourd'hui tourné vers l'IA pour l'énergie et le climat.",
       hero_sub:"À Grenoble pour un échange de recherche à l'Université Grenoble Alpes (MoSIG). Disponible pour un stage de recherche de mars à août 2027.",
       cta_contact:"Me contacter", cta_resume:"Télécharger le CV",
-      portrait_ph:"Votre portrait ici",
+      portrait_ph:"",
       about_title:"à propos.",
       about_lead:"Je construis des logiciels qui doivent marcher le lundi matin. Aujourd'hui, je veux qu'ils aident à faire tourner des systèmes énergétiques plus propres.",
       about_p1:"Pendant quatre ans et demi chez Purolator, l'un des plus grands logisticiens du Canada, j'ai livré des intégrations ERP, une infrastructure de comptabilité carbone et des agents IA en production. La refonte d'une intégration a permis d'identifier 3 M$ CA de revenus non facturés. Concevoir les modèles de données des scopes 1 à 3 pour Net Zero Cloud m'a montré où je voulais consacrer ma carrière.",
-      about_p2:"Je suis maintenant à Grenoble pour un échange de recherche à l'Université Grenoble Alpes, où je suis des cours de master en IA et en cloud computing tout en terminant mon bachelor en informatique à TMU. Je parle anglais, français et russe.",
-      film_title:"Hors du bureau, en argentique.", film_note:"Pris au Canon AE-1.",
+      about_p2:"Je suis maintenant à Grenoble pour une année d'échange universitaire à l'Université Grenoble Alpes, où je suis des cours de master (M1) en IA et en cloud computing tout en terminant mon bachelor en informatique (Bac+4) à TMU. Je parle anglais, français et russe.",
+      film_title:"Hors du bureau, en argentique.", film_note:"Pris à l'Olympus Pen EE-3.",
       story_title:"expérience.",
       story_intro:"Cinq ans d'ingénierie en production, du plus récent au plus ancien.",
       kit_title:"compétences.",
@@ -592,7 +592,7 @@ const CONTENT = {
   photos: [
     { src:"", caption:{ en:"Grenoble", fr:"Grenoble" } },
     { src:"", caption:{ en:"Toronto",  fr:"Toronto" } },
-    { src:"", caption:{ en:"Kitchen",  fr:"Cuisine" } },
+    { src:"", caption:{ en:"Paris",  fr:"Paris" } },
     { src:"", caption:{ en:"Friends",  fr:"Amis" } }
   ],
 
@@ -654,8 +654,8 @@ const CONTENT = {
   ],
 
   certifications: [
-    { title:{ en:"Salesforce Certified Advanced Administrator", fr:"Salesforce Certified Advanced Administrator" }, where:{ en:"Salesforce, credential 3992685", fr:"Salesforce, identifiant 3992685" }, year:"2023" },
-    { title:{ en:"Salesforce Certified Administrator", fr:"Salesforce Certified Administrator" }, where:{ en:"Salesforce, credential 2811244", fr:"Salesforce, identifiant 2811244" }, year:"2022" }
+    { logo:"logos/salesforce.jpg", mono:"Salesforce", title:{ en:"Salesforce Certified Advanced Administrator", fr:"Salesforce Certified Advanced Administrator" }, where:{ en:"Salesforce, credential 3992685", fr:"Salesforce, identifiant 3992685" }, year:"2023" },
+    { logo:"logos/salesforce.jpg", mono:"Salesforce", title:{ en:"Salesforce Certified Administrator", fr:"Salesforce Certified Administrator" }, where:{ en:"Salesforce, credential 2811244", fr:"Salesforce, identifiant 2811244" }, year:"2022" }
   ],
 
   // status: "progress" | "shipped" | "concept". image "" = generated heat map.
