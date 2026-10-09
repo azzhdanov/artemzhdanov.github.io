@@ -117,14 +117,14 @@
   .hero-grid{display:grid; grid-template-columns:1.2fr 1fr .62fr; min-height:calc(100svh - 70px)}
   .hero-copy{padding:clamp(24px,5vh,64px) var(--pad) clamp(28px,5vh,48px); display:flex; flex-direction:column; justify-content:center; gap:clamp(12px,2vh,22px)}
   .hi{font-family:var(--serif); font-size:clamp(20px,2vw,26px); font-weight:400}
-  .name{font-size:clamp(64px, 10vw, 148px)}
-  .hero-line{max-width:30ch}
+  .name{font-size:clamp(52px, min(8vw, 13vh), 128px)}
+  .hero-line{max-width:34ch; font-size:clamp(19px, min(1.9vw, 3vh), 26px)}
   .hero-sub{max-width:44ch}
   .ctas{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
 
-  .hero-photo{position:relative; display:flex; align-items:flex-end; justify-content:center; padding:48px var(--pad) 0}
+  .hero-photo{position:relative; display:flex; align-items:flex-end; justify-content:center; padding:clamp(24px,4vh,48px) var(--pad) 0}
   .arch{
-    width:100%; max-width:400px; aspect-ratio:3/4;
+    width:100%; max-width:min(400px, 58vh); aspect-ratio:3/4;
     border-radius:999px 999px 0 0; overflow:hidden; position:relative;
     background:linear-gradient(170deg, #f3d9c4 0%, #e9a58a 45%, #b98ad8 100%);
   }
@@ -135,8 +135,8 @@
   .badge text{font:600 11.5px var(--sans); letter-spacing:.14em; fill:var(--ink)}
   .badge .core{position:absolute; inset:36%; border-radius:50%; background:var(--ink)}
 
-  .hero-stats{border-left:1px solid var(--rule); padding:var(--gap-y) var(--pad) 48px; display:flex; flex-direction:column; justify-content:flex-end; gap:26px; text-align:right}
-  .stat b{display:block; font-family:var(--serif); font-weight:800; font-variation-settings:"opsz" 144; font-size:clamp(34px,3.6vw,48px); line-height:1; letter-spacing:-.03em}
+  .hero-stats{border-left:1px solid var(--rule); padding:clamp(24px,5vh,64px) var(--pad) clamp(28px,5vh,48px); display:flex; flex-direction:column; justify-content:flex-end; gap:clamp(12px,2.4vh,26px); text-align:right}
+  .stat b{display:block; font-family:var(--serif); font-weight:800; font-variation-settings:"opsz" 144; font-size:clamp(30px,min(3.4vw,5.5vh),48px); line-height:1; letter-spacing:-.03em}
   .stat span{display:block; font-size:13.5px; line-height:1.35; color:var(--soft); margin-top:4px}
 
   .focus{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--rule); background:color-mix(in srgb, var(--paper) 70%, transparent)}
@@ -521,8 +521,8 @@
         title: "Artem Zhdanov — Senior software engineer",
         nav_about:"About", nav_story:"Experience", nav_projects:"Projects", nav_contact:"Contact", nav_resume:"Resume",
         hero_hi:"Hello, I'm ",
-        hero_line:"Software engineer moving into research. Five years building enterprise systems in production, now looking for hands-on research experience.",
-        hero_sub:"In Grenoble for an exchange year at Université Grenoble Alpes (MoSIG). Looking for a research internship from January to May 2027, and open to a summer research collaboration from June to August.",
+        hero_line:"Software engineer moving into research, after five years building production systems.",
+        hero_sub:"Exchange year at Université Grenoble Alpes (MoSIG). Seeking a research internship, January to May 2027. Open to summer research, June to August.",
         cta_contact:"Get in touch", cta_resume:"Download resume",
         portrait_ph:"",
         about_title:"about me.",
@@ -547,8 +547,8 @@
         title: "Artem Zhdanov — Ingénieur logiciel senior",
         nav_about:"À propos", nav_story:"Expérience", nav_projects:"Projets", nav_contact:"Contact", nav_resume:"CV",
         hero_hi:"Bonjour, moi c'est",
-        hero_line:"Ingénieur logiciel en transition vers la recherche. Cinq ans de systèmes d'entreprise en production, aujourd'hui en quête d'une vraie expérience de recherche.",
-        hero_sub:"À Grenoble pour une année d'échange universitaire à l'Université Grenoble Alpes (MoSIG). Je cherche un stage de recherche de janvier à mai 2027 et reste ouvert à une collaboration de recherche l'été, de juin à août.",
+        hero_line:"Ingénieur logiciel en transition vers la recherche, après cinq ans de systèmes en production.",
+        hero_sub:"Année d'échange à l'Université Grenoble Alpes (MoSIG). Je cherche un stage de recherche de janvier à mai 2027, et reste ouvert à une collaboration l'été (juin à août).",
         cta_contact:"Me contacter", cta_resume:"Télécharger le CV",
         portrait_ph:"",
         about_title:"à propos.",
@@ -727,7 +727,7 @@
     const mail = document.getElementById("email-link"); mail.href = "mailto:" + L.email; mail.textContent = L.email;
 
     document.getElementById("portrait").innerHTML = CONTENT.portrait
-      ? `<img src="${esc(CONTENT.portrait)}" alt="Artem Zhdanov">`
+      ? `<img src="${esc(CONTENT.portrait)}" alt="Artem Zhdanov" onerror="this.remove()">`
       : `<span class="ph">${esc(ui("portrait_ph"))}</span>`;
 
     document.getElementById("stats").innerHTML = CONTENT.stats.map(s =>
